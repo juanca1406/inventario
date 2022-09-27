@@ -1,0 +1,592 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: #222;
+}
+header{
+    background: #fafdfd;
+}
+img{
+    width: 100%;
+    display: block;
+}
+
+.navbar img{
+    width: 150px;
+    opacity: 0.85;
+}
+.banner-wrapper{
+    padding-left: 70px;
+    padding-right: 200px !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+}
+.navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar-brand{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.navbar-brand span{
+    margin-left: 0.4rem;
+    color: #222;
+    font-weight: 700;
+    font-size: 2rem;
+}
+.nav-icons{
+    display: flex;
+    align-items: center;
+}
+.nav-icons a:last-child{
+    margin-left: 1rem;
+    display: block;
+    color: #222;
+}
+.banner-content{
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-content: center;
+    justify-content: center;
+    
+}
+.banner-left h2{
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.banner-left span{
+    display: block;
+    font-size: 4.4rem;
+}
+.banner-left p{
+    margin: 1.6rem 0;
+    line-height: 1.4;
+}
+.banner-left button{
+    background: #222;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.65rem 2rem;
+    border: 3px solid #222;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+.banner-left button:hover{
+    background: #fff;
+    color: #222;
+    border-color: #222;
+}
+.banner-left button:focus{
+    outline: 0;
+}
+.color-content{
+    margin-top: 1.2rem;
+}
+.color-content h3{
+    text-transform: uppercase;
+    font-size: 1.6rem;
+}
+.color{
+    width: 35px;
+    height: 35px;
+    background: none;
+    border-radius: 50%;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+.color:hover{
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+.active-color{
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+.color-groups{
+    padding: 2rem 0;
+    display: flex;
+}
+.color-groups2{
+    display: flex;
+}
+.banner-right{
+    float: left;
+    width: 710px;   
+}
+
+
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    padding: 5px 20px;
+    bottom: -1.6em;
+    left: 100%;
+    white-space: nowrap;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    border: 1px solid #111111;
+    z-index: 99999;
+    visibility: hidden;
+    border-radius: 6px;
+    
+}
+[data-title] {
+    position: relative;
+}
+
+/* Media Queries */
+@media screen and (max-width: 992px){
+    .navbar{
+        padding-bottom: 3rem;
+    }
+    .banner-content{
+        grid-template-columns: 100%;
+        text-align: center;
+    }
+    .banner-left h2{
+        font-size: 2rem;
+    }
+    .banner-left span{
+        font-size: 2.8rem;
+    }
+    .color-groups{
+        display: flex;
+        justify-content: center;
+    }
+    .color:last-child{
+        margin-right: 0;
+    }
+}
+
+.color-BCO{
+    background-color: #FFFFFF;
+}
+.color-997{
+    background-color: #C5C8BE;
+}
+.color-001{
+    background-color: #DAD79C;
+}
+.color-007{
+    background-color: #BCBE73;
+}
+.color-006{
+    background-color: #B38D42;
+}
+.color-010{
+    background-color: #D6CE28;
+}
+.color-008{
+    background-color: #D9B431;
+}
+.color-107{
+    background-color: #AF744A;
+}
+.color-109{
+    background-color: #C49B8D;
+}
+.color-108{
+    background-color: #864421;
+}
+.color-829{
+    background-color: #97510C;
+}
+.color-145{
+    background-color: #B8591F;
+}
+.color-111{
+    background-color: #942D0A;
+}
+.color-183{
+    background-color: #F63A15;
+}
+.color-184{
+    background-color: #FF5442;
+}
+/*TIRILLA2*/
+.color-051{
+    background-color: #EBC5D0;
+}
+.color-057{
+    background-color: #EDA0B4;
+}
+.color-056{
+    background-color: #B16B83;
+}
+.color-068{
+    background-color: #923C5F;
+}
+.color-066{
+    background-color: #D14572;
+}
+.color-064{
+    background-color: #B72853;
+}
+.color-072{
+    background-color: #AE2B5F;
+}
+.color-069{
+    background-color: #75072C;
+}
+.color-071{
+    background-color: #922044;
+}
+.color-180{
+    background-color: #FE435E;
+}
+.color-065{
+    background-color: #FE4777;
+}
+.color-070{
+    background-color: #D01A40;
+}
+.color-067{
+    background-color: #F84C86;   
+}
+.color-185{
+    background-color: #FF6666;
+}
+.color-385{
+    background-color: #9B4342;
+}
+/*TIRILLA3*/
+.color-162{
+    background-color: #88ba89;
+}
+.color-166{
+    background-color: #5ecbae;
+}
+.color-678{
+    background-color: #669999;
+}
+.color-679{
+    background-color: #60b2ae;
+}
+.color-675{
+    background-color: #326353;
+}
+.color-551{
+    background-color: #1b6c66;
+}
+.color-553{
+    background-color: #2a7578;
+}
+.color-552{
+    background-color: #174234;
+}
+.color-154{
+    background-color: #d3f465;
+}
+.color-152{
+    background-color: #889647;
+}
+.color-149{
+    background-color: #71bb66;
+}
+.color-150{
+    background-color: #5c7732;
+}
+.color-151{
+    background-color: #8b947b;   
+}
+.color-153{
+    background-color: #8d8b20;
+}
+.color-617{
+    background-color: #6c5a28;
+}
+/*TIRILLA 4*/
+.color-410{
+    background-color: #8f2064;
+}
+.color-413{
+    background-color: #5a2f5a;
+}
+.color-414{
+    background-color: #3c245a;
+}
+.color-416{
+    background-color: #211359;
+}
+.color-202{
+    background-color: #839eb3;
+}
+.color-238{
+    background-color: #83c4d8;
+}
+.color-217{
+    background-color: #3d88b0;
+}
+.color-237{
+    background-color: #589ec0;
+}
+.color-220{
+    background-color: #11638b;
+}
+.color-210{
+    background-color: #4c658e;
+}
+.color-212{
+    background-color: #5783b4;
+}
+.color-211{
+    background-color: #74baf5;   
+}
+.color-205{
+    background-color: #375b99;
+}
+.color-831{
+    background-color: #4e5c89;
+}
+/*Tirilla5*/
+.color-213{
+    background-color: #31546a;
+}
+.color-832{
+    background-color: #273864;
+}
+.color-830{
+    background-color: #182c44;
+}
+.color-833{
+    background-color: #004277;
+}
+.color-219{
+    background-color: #18567b;
+}
+.color-681{
+    background-color: #1a5b71;
+}
+.color-218{
+    background-color: #184f63;
+}
+.color-682{
+    background-color: #0f3a50;
+}
+.color-206{
+    background-color: #173c71;
+}
+.color-208{
+    background-color: #0f1e47;
+}
+.color-209{
+    background-color: #080a46;
+}
+.color-834{
+    background-color: #000b1d;
+}
+.color-214{
+    background-color: #060918;   
+}
+.color-215{
+    background-color: #07080d;
+}
+.color-688{
+    background-color: #85b59f;
+}
+/*Tirilla6*/
+.color-165{
+    background-color: #a5fa09;
+}
+.color-161{
+    background-color: #dcff27;
+}
+.color-164{
+    background-color: #8ef159;
+}
+.color-768{
+    background-color: #6ca266;
+}
+.color-167{
+    background-color: #378d66;
+}
+.color-163{
+    background-color: #2d673e;
+}
+.color-168{
+    background-color: #0e4639;
+}
+.color-155{
+    background-color: #5b5941;
+}
+.color-159{
+    background-color: #303b22;
+}
+.color-158{
+    background-color: #23322d;
+}
+.color-156{
+    background-color: #3f3a38;
+}
+.color-160{
+    background-color: #1b1810;
+}
+.color-148{
+    background-color: #294a4c;   
+}
+.color-157{
+    background-color: #0b1f28;
+}
+.color-998{
+    background-color: #edf0dc;
+}
+/*Tirilla7*/
+.color-301{
+    background-color: #ccc6ae;
+}
+.color-091{
+    background-color: #a38872;
+}
+.color-307{
+    background-color: #9e9c8b;
+}
+.color-305{
+    background-color: #8c7c63;
+}
+.color-636{
+    background-color: #725f49;
+}
+.color-637{
+    background-color: #716d64;
+}
+.color-6393{
+    background-color: #726c59;
+}
+.color-6428{
+    background-color: #6e6458;
+}
+.color-7224{
+    background-color: #665c50;
+}
+.color-639{
+    background-color: #595543;
+}
+.color-638{
+    background-color: #4b523e;
+}
+.color-009{
+    background-color: #464430;
+}
+.color-309{
+    background-color: #dabf88;   
+}
+.color-302{
+    background-color: #97865b;
+}
+.color-4247{
+    background-color: #6e5245;
+}
+/*Tirilla8*/
+.color-310{
+    background-color: #644118;
+}
+.color-1034{
+    background-color: #4d1f09;
+}
+.color-240{
+    background-color: #37221b;
+}
+.color-931{
+    background-color: #30210f;
+}
+.color-936{
+    background-color: #78291a;
+}
+.color-937{
+    background-color: #6a3325;
+}
+.color-495{
+    background-color: #190708;
+}
+.color-334{
+    background-color: #211817;
+}
+.color-333{
+    background-color: #1a0f0e;
+}
+.color-254{
+    background-color: #7a7f75;
+}
+.color-257{
+    background-color: #525252;
+}
+.color-255{
+    background-color: #333843;
+}
+.color-256{
+    background-color: #1f261f;   
+}
+.color-261{
+    background-color: #1b1810;
+}
+.color-100{
+    background-color: #080808;
+}
+/*Tirilla9*/
+.color-004{
+    background-color: #9d9244;
+}
+.color-005{
+    background-color: #a39220;
+}
+.color-011{
+    background-color: #965712;
+}
+.color-012{
+    background-color: #a06308;
+}
+.color-311{
+    background-color: #5a1907;
+}
+.color-312{
+    background-color: #795610;
+}
+.color-055{
+    background-color: #592f30;
+}
+.color-058{
+    background-color: #a76b6b;
+}
+.color-417{
+    background-color: #4e1128;
+}
+.color-550{
+    background-color: #0b533d;
+}
