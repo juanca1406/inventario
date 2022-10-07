@@ -1,3 +1,10 @@
+
+<?php 
+  include('conexion.php');
+  $query = "select * from productos";
+  $resultado = mysqli_query($conn,$query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +45,7 @@
           </a>
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajustes</font></font></a></li>
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
+            <li><a class="dropdown-item" href="perfil.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
           </ul>
@@ -81,62 +88,40 @@
       <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lista de Producto</font></font></h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
-         
-          <?php
-
-        require("connect_db.php");
-        $sql=("SELECT * FROM productos");
-
-          //la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
-        $query=mysqli_query($mysqli,$sql);
-        echo "<table class='table table-hover';>";
-        echo "<tr class='warning'>";
-          echo "<td>Id</td>";
-          echo "<td>Codigo</td>";
-          echo "<td>Nombre</td>";
-          echo "<td>Precio Venta</td>";
-          echo "<td>Precio Costos</td>";
-          echo "<td>Categoria</td>";
-          echo "<td>Editar</td>";
-          echo "<td>Borrar</td>";
-          echo "</tr>";
-            ?>
-
-             <?php
-            while($arreglo=mysqli_fetch_array($query)){
-               echo "<tr class='success'>";
-                echo "<td>$arreglo[0]</td>";
-                 echo "<td>$arreglo[1]</td>";
-                 echo "<td>$arreglo[2]</td>";
-                 echo "<td>$arreglo[3]</td>";
-                 echo "<td>$arreglo[5]</td>";
-                 echo "<td>$arreglo[4]</td>";
-
-                 echo "<td><a href='actualizar.php?id=$arreglo[0]'><button class='w-40 btn btn-md btn-success'>Editar</button></td>";
-               echo "<td><a href='inventario.php?id=$arreglo[0]&idborrar=2'><button  class='w-40 btn btn-md btn-danger'>Eliminar</button></td>";
-               
-             echo "</tr>";
-           }
-   
-           echo "</table>";
-   
-             extract($_GET);
-             if(@$idborrar==2){
-       
-               $sqlborrar="DELETE FROM productos WHERE id=$id";
-               $resborrar=mysqli_query($mysqli,$sqlborrar);
-               echo '<script>alert("REGISTRO ELIMINADO")</script> ';
-               //header('Location: proyectos.php');
-               echo "<script>location.href='inventario.php'</script>";
-             }
-   
-?>
+        <thead class="thead-dark"><br>
+                <tr>
+                  <th>Id</th>
+                    <th>Codigo</th>
+                    <th>Nombre del producto</th>
+                    <th>Precio</th>
+                    <th>Categoria</th>
+                    <th>Precio del costo</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <?php foreach($resultado as $row){ ?>
+            <tr>
+              <th><?php echo $row['id']; ?></th>
+              <th><?php echo $row['codigo']; ?></th>
+              <th><?php echo $row['nombre']; ?></th>
+              <th><?php echo $row['precio']; ?></th>
+              <th><?php echo $row['categoria']; ?></th>
+              <th><?php echo $row['preciocosto']; ?></th>
+              <th><?php echo $row['descripcion']; ?></th>
+              <th><img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" width="40" height="50" alt="..."></th>
+              <th><a href="actualizar2.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Editar</button></th></a>
+              <th><a href="confirmar.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger">Eliminar</button></th></a>
             </tr>
-            
-           
-          </tbody>
+            <?php }?>
+
         </table>
+        
       </div>
 </div>
 </div>
     </main>
+    
+    

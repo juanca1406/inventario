@@ -1,15 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>actualizar</title>
+    <title>Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+
 </head>
 <body>
 <header class="p-3 mb-6 border-bottom">
@@ -36,52 +37,22 @@
           </a>
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajustes</font></font></a></li>
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
+            <li><a class="dropdown-item" href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
           </ul>
         </div>
 </header>
-<?php
-		extract($_GET);
-		require("connect_db.php");
-
-		$sql="SELECT * FROM login WHERE id=$id";
-	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
-		$ressql=mysqli_query($mysqli,$sql);
-		while ($row=mysqli_fetch_row ($ressql)){
-               $id=$row[0];
-		    	$nombre=$row[1];
-		    	$email=$row[3];
-		    }
-		?>
-<form action="ejecutaactualizar.php" method="post">
-     <h1>Actualizar Productos</h1>
-<table class='table table-hover'>
-<tr>
-<td><div class="col-md-12 mb-3 ">    
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Id</font></font></label>     
-     <input type="text" name="id" class="form-control" style="text-align: center;" value= "<?php echo $id?>"  readonly="readonly">  
-</div></td>
-
-<td><div class="col-md-12 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Nombre</font></font></label>     
-     <input type="text" name="nombre" class="form-control" style="text-align: center;" value= "<?php echo $nombre?>">  
-</div></td>
-
-<td><div class="col-md-12 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Correo Electronico</font></font></label>     
-     <input type="text" name="email" class="form-control" style="text-align: center;" value= "<?php echo $email?>">  
-</div></td>
-
-<div style = "position:relative; left:-640px;">
-    <button type="submit" value="Guardar" class="w-40 btn btn-md btn-primary" style="float: right;">Guardar</button>
-</div>
-</tr>
-</table>
-</form>
+<header class="py-3 mb-4 border-bottom">
+    <div class="container d-flex flex-wrap justify-content-center">
+      <a href="" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+      <img src="imagenes/motorola.png" alt="hacer" width="32" height="32" class="rounded-circle">
+        <span class="fs-4">Double header</span>
+      </a>
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+      </form>
+    </div>
+  </header>
 </body>
 </html>

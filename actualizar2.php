@@ -1,19 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario</title>
+    <title>actualizar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
-</html>
-<div class="container-fluid">
-<div class="row">
-
+<body>
 <header class="p-3 mb-6 border-bottom">
 <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -44,82 +42,78 @@
           </ul>
         </div>
 </header>
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg- sidebar collapse">
-      <div class="position-sticky pt-3 sidebar-sticky">
-    <a href="admin.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil: Admin</font></font></span>
-    </a>
-    <hr>
-    <ul class="nav flex-column">
-      <li>
-        <a href="agregar.php" class="nav-link link-dark">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-          Agregar
-          
-        </font></font></a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-          Pedidos
-        </font></font></a>
-      </li>
-      <li>
-        <a href="inventario.php" class="nav-link link-dark">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-          Productos
-        </font></font></a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<main class="col-lg">
-<form action="registro2.php"  method="post" enctype="multipart/form-data">
-<div class="col-md-2 mb-3"><br><br> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Codigo</font></font></label>     
-     <input name="codigo" type="text" class="form-control"placeholder="" required>  
+<?php
+		extract($_GET);
+		require("connect_db.php");
+
+		$sql="SELECT * FROM productos WHERE id=$id";
+	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
+		$ressql=mysqli_query($mysqli,$sql);
+		while ($row=mysqli_fetch_row ($ressql)){
+                $id=$row[0];
+               $codigo=$row[1];
+		    	$nombre=$row[2];
+		    	$precio=$row[3];
+                $categoria=$row[4];
+		    	$preciocosto=$row[5];
+		    	$imagen=$row[6];
+               $descripcion=$row[7];
+		    }
+		?>
+<main>
+<form action="ejecutaactualizar2.php"  method="post" enctype="multipart/form-data">
+<div class="col-md-2 mb-3" style = "position:relative; left:100px;"><br><br> 
+     <label  for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+     Id</font></font></label>     
+     <input value= "<?php echo $id?>" name="id" type="text" class="form-control"placeholder=""  readonly="readonly">  
 </div>
-<div class="col-md-3 mb-3"> 
+<div class="col-md-2 mb-3" style = "position:relative; left:100px;">
+     <label  for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+     Codigo</font></font></label>     
+     <input value= "<?php echo $codigo?>" name="codigo" type="text" class="form-control"placeholder="" required>  
+</div>
+<div class="col-md-3 mb-3"  style = "position:relative; left:100px;"> 
      <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
      Nombre del producto</font></font></label>     
-     <input name="nombre" type="text" class="form-control"placeholder="" required>  
+     <input value= "<?php echo $nombre?>" name="nombre" type="text" class="form-control"placeholder="" >  
 </div>
-<div class="col-md-3 mb-3"> 
+<div class="col-md-3 mb-3"  style = "position:relative; left:100px;"> 
      <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
      Precio</font></font></label>     
-     <input name="precio" type="text" class="form-control"placeholder="" required>  
+     <input value= "<?php echo $precio?>" name="precio" type="text" class="form-control"placeholder="" >  
 </div>
 
-<div class="col-md-3 mb-3"> 
+<div class="col-md-3 mb-3"  style = "position:relative; left:100px;"> 
      <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
      Categoria</font></font></label>     
-     <input name="categoria" type="text" class="form-control"placeholder="" required>  
-</div><br><br><br><br>
-<div class="col-md-3 mb-3" style="position:relative; left:400px; top:-435px;"> 
+     <input value= "<?php echo $categoria?>" name="categoria" type="text" class="form-control"placeholder="" >  
+</div>
+<div class="col-md-3 mb-3"  style="position:relative; left:500px; top:-440px;"> 
      <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
      Descripción</font></font></label>     
-     <input name="descripcion" type="text" class="form-control"placeholder="" required>  
+     <input value= "<?php echo $descripcion?>" name="descripcion" type="text" class="form-control"placeholder="" >  
 </div>
-<div style="position:relative; left:400px; top:-435px;">
+<div style="position:relative; left:500px; top:-440px;">
 <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
      Opcional: </font></font></label>     
 </div>
-<div class="col-md-3 mb-3" style="position:relative; left:400px; top:-435px;"> 
+<div class="col-md-3 mb-3" style="position:relative; left:500px; top:-440px;"> 
      <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
      Precio del costo</font></font></label>     
-     <input name="preciocosto" type="text" class="form-control"placeholder="">  
+     <input value= "<?php echo $preciocosto?>" name="preciocosto" type="text" class="form-control"placeholder="">  
 </div>
-<div class="mb-3 col-md-4" style = "position:relative; left:400px; top:-430px;">
-  <label for="formFile" class="form-label">Seleccionar una imagen</label>
-  <input name="imagen" class="form-control" type="file">
+
+<div style="position:relative; left:850px; top:-640px;" >
+<img src="imagenes/<?php echo $imagen?>" height="200px">
+<label for="formFile" class="form-label">Cambia tu foto</label><br><br>
+ Ingresa tu foto nueva <br><input class="col-md-3" name="imagen" class="form-control" type="file" placeholder="">
 </div>
-<div style = "position:relative; left:-600px; top:-400px;">
+<div style = "position:relative; left:-650px; top:-600px;">
     
-    <input type="submit" value="Guardar" name="Guardar" class="w-40 btn btn-md btn-primary" style="float: right; " >Agregar
+    <input type="submit" value="Guardar" name="Guardar" class="w-40 btn btn-md btn-primary" style="float: right; " >
 </div>
+
 </form>
 </main>
+</body>
+</html>

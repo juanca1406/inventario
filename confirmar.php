@@ -1,18 +1,34 @@
+<?php
+	require("connect_db.php");
+    if(!empty($_POST)){
+      $id = $_POST['id'];
 
+      $query_delete = mysqli_query($mysqli,"DELETE FROM productos WHERE id=$id");
+      if($query_delete){
+        header("location: inventario.php");
+      }else{
+        echo "Error al eliminar";
+      }
+    }
+
+
+ 
+
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>actualizar</title>
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
-<body>
-<header class="p-3 mb-6 border-bottom">
+
+        <header class="p-3 mb-6 border-bottom">
 <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="" class="d-flex align-items-center mb-2 mb-lg-2 text-dark text-decoration-none">
@@ -41,47 +57,42 @@
             <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
           </ul>
         </div>
-</header>
+</header><br><br><br>
 <?php
 		extract($_GET);
 		require("connect_db.php");
 
-		$sql="SELECT * FROM login WHERE id=$id";
+		$sql="SELECT * FROM productos WHERE id=$id";
 	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 		$ressql=mysqli_query($mysqli,$sql);
 		while ($row=mysqli_fetch_row ($ressql)){
-               $id=$row[0];
-		    	$nombre=$row[1];
-		    	$email=$row[3];
+                $id=$row[0];
+                $codigo=$row[1];
+		    	      $nombre=$row[2];
+                $categoria=$row[4];
+                $imagen=$row[6];
 		    }
 		?>
-<form action="ejecutaactualizar.php" method="post">
-     <h1>Actualizar Productos</h1>
-<table class='table table-hover'>
-<tr>
-<td><div class="col-md-12 mb-3 ">    
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Id</font></font></label>     
-     <input type="text" name="id" class="form-control" style="text-align: center;" value= "<?php echo $id?>"  readonly="readonly">  
-</div></td>
+<div class="container"><br>
+    <div class="card">
+        <center><div class="card-header bg-danger text-dark">ELIMINAR</div></center>
+            <div class="card-body">
+           
+        
+                <div class="row">
+                    <center><p>¿Deseas eliminar el Codigo: <?php echo $codigo?>?</p></center>
+                    <center><p>¿Deseas eliminar el Producto: <?php echo $nombre?>?</p></center>
+                    <center><p>¿Deseas eliminar el Categoria: <?php echo $categoria?>?</p></center>
+                    <center><img src="imagenes/<?php echo $imagen?>"  width="200px" height="100px" alt="..."></center>
+                </div><br>
+                <div class="d-md-block" style = "position:relative; left:480px;">
+               
+                <a href="eliminar.php?id=<?php echo $id?>"><button type="submit" style = "position:relative; left:0px;" class="btn btn-success" type="button">Si</button></a>
+                <a href="inventario.php"><button style = "position:relative; left:20px;" class="btn btn-danger" type="button">No</button></a>
+                </div>
 
-<td><div class="col-md-12 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Nombre</font></font></label>     
-     <input type="text" name="nombre" class="form-control" style="text-align: center;" value= "<?php echo $nombre?>">  
-</div></td>
-
-<td><div class="col-md-12 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Correo Electronico</font></font></label>     
-     <input type="text" name="email" class="form-control" style="text-align: center;" value= "<?php echo $email?>">  
-</div></td>
-
-<div style = "position:relative; left:-640px;">
-    <button type="submit" value="Guardar" class="w-40 btn btn-md btn-primary" style="float: right;">Guardar</button>
+          
+        </div> 
+    </div> 
 </div>
-</tr>
-</table>
-</form>
-</body>
 </html>

@@ -36,7 +36,7 @@
     </div></center><br>
     <center><div class="form-floating col-md-3">
       <input name="rpass" type="password" class="form-control" id="floatingPassword" placeholder="Password"required>
-      <label for="floatingPassword">Contraseña</label>
+      <label for="floatingPassword">Repita Contraseña</label>
     </div></center>
     <div class="checkbox mb-3">
     </div>
