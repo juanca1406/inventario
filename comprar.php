@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
           <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
+          <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito</font></font></a></li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -33,9 +35,7 @@
             <img src="https://github.com/mdo.png" alt="hacer" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nuevo proyecto...</font></font></a></li>
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajustes</font></font></a></li>
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
+            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Configuracion</font></font></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
           </ul>
@@ -43,6 +43,28 @@
       </div>
     </div>
   </header>
+  <?php
+		include 'conexion.php';
+    $stmt = $conn->query('SELECT * FROM productos where id='.$_GET['id']);
 
-</body>
-</html>
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		?>
+
+<div class="card-columns">
+         <div class="card">
+      <img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" height="300"  alt="...">
+       <div class="card-body">
+      <center><h5 class="card-title"><strong><?php echo $row['nombre']; ?></strong></h5></center>
+      <center><h3><?php echo $row['descripcion']; ?></h3></center>
+      <h6 style = "position:relative;  top: 20px;" class="card-title"><strong>precio: <?php echo $row['precio']; ?></strong></h5></div>
+    </div>
+    <div>
+        <LAbel><?php echo $row['id']; ?></LAbel>
+        <h1>Nombre de la empresa</h1>
+        <a href="pago.php"><Button class="btn btn-info">Comprar</Button></a>
+        
+        <a href="carrito.php?id=<?php echo $row['id']; ?>"><Button class="btn btn-warning">Agregar al carrito</Button></a>
+    </div>
+    <?php
+		}
+	  ?>

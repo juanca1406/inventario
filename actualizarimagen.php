@@ -61,54 +61,19 @@
 		    }
 		?>
 <main>
-<form action="ejecutaactualizar2.php"  method="post" enctype="multipart/form-data">
-<div class="col-md-2 mb-3" style = "position:relative; left:100px;"><br><br> 
-     <label  for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Id</font></font></label>     
-     <input value= "<?php echo $id?>" name="id" type="text" class="form-control"placeholder=""  readonly="readonly">  
-</div>
-<div class="col-md-2 mb-3" style = "position:relative; left:100px;">
-     <label  for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Codigo</font></font></label>     
-     <input value= "<?php echo $codigo?>" name="codigo" type="text" class="form-control"placeholder="" required>  
-</div>
-<div class="col-md-3 mb-3"  style = "position:relative; left:100px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Nombre del producto</font></font></label>     
-     <input value= "<?php echo $nombre?>" name="nombre" type="text" class="form-control"placeholder="" >  
-</div>
-<div class="col-md-3 mb-3"  style = "position:relative; left:100px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Precio</font></font></label>     
-     <input value= "<?php echo $precio?>" name="precio" type="text" class="form-control"placeholder="" >  
-</div>
+    
+<form action="ejecutarimagen.php"  method="post" enctype="multipart/form-data">
+<br><center><h1>Cambiar Imagen</h1></center><br>
+<input value= "<?php echo $id?>" name="id" type="hidden" class="form-control"placeholder=""  readonly="readonly">  
 
-<div class="col-md-3 mb-3"  style = "position:relative; left:100px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Categoria</font></font></label>     
-     <input value= "<?php echo $categoria?>" name="categoria" type="text" class="form-control"placeholder="" >  
-</div>
-<div class="col-md-3 mb-3"  style="position:relative; left:500px; top:-440px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Descripción</font></font></label>     
-     <input value= "<?php echo $descripcion?>" name="descripcion" type="text" class="form-control"placeholder="" >  
-</div>
-<div style="position:relative; left:500px; top:-440px;">
+<div class="col-md-3 mb-3" style="position:relative; left:600px; top:20px;">
+<img src="imagenes/<?php echo $imagen; ?>"  height="200px"  alt="..."><br><br>
 <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Opcional: </font></font></label>     
-</div>
-<div class="col-md-3 mb-3" style="position:relative; left:500px; top:-440px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Precio del costo</font></font></label>     
-     <input value= "<?php echo $preciocosto?>" name="preciocosto" type="text" class="form-control"placeholder="">  
-</div>
-<div class="col-md-3 mb-3" style="position:relative; left:500px; top:-440px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Cantidad</font></font></label>     
-     <input value= "<?php echo $cantidad?>" name="cantidad" type="text" class="form-control"placeholder="">  
+     Cambia la foto</font></font></label>     
+     <input name="imagen" type="file" class="form-control"placeholder="" required>  
 </div>
 
-<div style = "position:relative; left:-650px; top:-420px;">
+<div style = "position:relative; left:-600px; top:20px;">
     
     <input type="submit" value="Guardar" name="Guardar" class="w-40 btn btn-md btn-primary" style="float: right; " >
 </div>

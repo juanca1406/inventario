@@ -1,7 +1,7 @@
 <?php 
-  include('conexion.php');
+  include('connect_db.php');
   $query = "select * from productos";
-  $resultado = mysqli_query($conn,$query);
+  $resultado = mysqli_query($mysqli,$query);
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +28,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inicio</font></font></a></li>
           <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
+          <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito</font></font></a></li>
          
         </ul>
 
@@ -49,43 +50,21 @@
       </div>
     </div>
   </header>
-  <?php
-		extract($_GET);
-		require("connect_db.php");
-
-		$sql="SELECT * FROM productos";
-	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
-		$ressql=mysqli_query($mysqli,$sql);
-		while ($row=mysqli_fetch_row ($ressql)){
-            $id=$row[0];
-            $codigo=$row[1];
-             $nombre=$row[2];
-             $precio=$row[3];
-             $categoria=$row[4];
-             $preciocosto=$row[5];
-             $imagen=$row[6];
-             $descripcion=$row[7];
-		    }
-		?>
-
 
         <div class="h-100 p-5 text-bg-dark rounded-3;">
          <center><h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la empresa </font></font></h2></center>
         </div><br>
-
         <div class="card-columns">
         <?php foreach($resultado as $row){ ?>
          <div class="card">
       <img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" height="300"  alt="...">
        <div class="card-body">
-      <center><h5 class="card-title"><strong><?php echo $row['nombre']; ?></strong></h5></center>
+      <center><h5 class="col-xs-12 col-sm-4 col-md-4 col-lg-6 text-center card-title"><strong><?php echo $row['nombre']; ?></strong></h5></center>
       <center><p><?php echo $row['descripcion']; ?></p></center>
-      
-      <a href="comprar.php?id=<?php $row['id']?>"><button class="btn btn-secondary"  style = "position:relative; left:150px; top:50px;">Comprar</button></a>
-      <small style = "position:relative; left:190px; top:60px;" >Nombre de la empresa</small>
-      <h5 style = "position:relative;  top: 20px;" class="card-title"><strong>precio: <?php echo $row['precio']; ?></strong></h5></div>
-          
-    </div>
+      <h6 style = "position:relative;  top: 20px;" class="card-title"><strong>precio: <?php echo $row['precio']; ?></strong></h5></div>
+
+      <a href="comprar.php?id=<?php echo $row['id'];?>"><button class="btn btn-secondary"  style = "position:relative; left:150px; top:-10px;">Comprar</button></a>
+      </div>
   <?php }?>
 </body>
 </html>

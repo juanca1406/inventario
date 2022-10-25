@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario</title>
+    <title>Tienda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
+<!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-</head>
-</html>
-<div class="container-fluid">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  </head>
+  <div class="container-fluid">
 <div class="row">
 
 <header class="p-3 mb-6 border-bottom">
@@ -37,8 +37,7 @@
             <img src="https://github.com/mdo.png" alt="hacer" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajustes</font></font></a></li>
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
+            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Configuración</font></font></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
           </ul>
@@ -76,55 +75,3 @@
     </ul>
   </div>
 </nav>
-<main class="col-lg">
-<form action="registro2.php"  method="post" enctype="multipart/form-data">
-<div class="col-md-2 mb-3"><br><br> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Codigo</font></font></label>     
-     <input name="codigo" type="text" class="form-control"placeholder="" required>  
-</div>
-<div class="col-md-3 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Nombre del producto</font></font></label>     
-     <input name="nombre" type="text" class="form-control"placeholder="" required>  
-</div>
-<div class="col-md-3 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Precio</font></font></label>     
-     <input name="precio" type="text" class="form-control"placeholder="" required>  
-</div>
-
-<div class="col-md-3 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Categoria</font></font></label>     
-     <input name="categoria" type="text" class="form-control"placeholder="" required>  
-</div>
-<div class="col-md-3 mb-3"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Cantidad</font></font></label>     
-     <input name="cantidad" type="text" class="form-control"placeholder="" required>  
-</div>
-<div class="col-md-3 mb-3" style="position:relative; left:400px; top:-435px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Descripción</font></font></label>     
-     <input name="descripcion" type="text" class="form-control"placeholder="" required>  
-</div>
-<div style="position:relative; left:400px; top:-435px;">
-<label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Opcional: </font></font></label>     
-</div>
-<div class="col-md-3 mb-3" style="position:relative; left:400px; top:-435px;"> 
-     <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-     Precio del costo</font></font></label>     
-     <input name="preciocosto" type="text" class="form-control"placeholder="">  
-</div>
-<div class="mb-3 col-md-4" style = "position:relative; left:400px; top:-430px;">
-  <label for="formFile" class="form-label">Seleccionar una imagen</label>
-  <input name="imagen" class="form-control" type="file">
-</div>
-<div style = "position:relative; left:-600px; top:-400px;">
-    
-    <input type="submit" value="Guardar" name="Guardar" class="w-40 btn btn-md btn-primary" style="float: right; " >Agregar
-</div>
-</form>
-</main>

@@ -9,6 +9,7 @@ if(isset($_POST['Guardar'])){
     $categoria = $_POST['categoria'];
     $preciocosto = $_POST['preciocosto'];
     $descripcion = $_POST['descripcion'];
+    $cantidad = $_POST['cantidad'];
     if(isset($imagen) && $imagen != ""){
         $tipo = $_FILES['imagen']['type'];
         $temp  = $_FILES['imagen']['tmp_name'];
@@ -18,7 +19,7 @@ if(isset($_POST['Guardar'])){
           $_SESSION['tipo'] = 'danger';
           header('location:agregar.php');
        }else{
-         $query = "INSERT INTO productos(codigo,nombre,precio,categoria,preciocosto,imagen,descripcion) values('$codigo','$nombre','$precio','$categoria','$preciocosto','$imagen','$descripcion')";
+         $query = "INSERT INTO productos(codigo,nombre,precio,categoria,preciocosto,imagen,descripcion,cantidad) values('$codigo','$nombre','$precio','$categoria','$preciocosto','$imagen','$descripcion',($cantidad)";
          $resultado = mysqli_query($conn,$query);
          if($resultado){
             move_uploaded_file($temp,'imagenes/'.$imagen);   

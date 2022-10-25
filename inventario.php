@@ -1,8 +1,8 @@
 
 <?php 
-  include('conexion.php');
+  include('connect_db.php');
   $query = "select * from productos";
-  $resultado = mysqli_query($conn,$query);
+  $resultado = mysqli_query($mysqli,$query);
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +44,7 @@
             <img src="https://github.com/mdo.png" alt="hacer" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ajustes</font></font></a></li>
-            <li><a class="dropdown-item" href="perfil.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
+            <li><a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Configuración</font></font></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
           </ul>
@@ -69,9 +68,9 @@
         </font></font></a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="cantidad.php" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-          Pedidos
+          Cantidad
         </font></font></a>
       </li>
       <li>
@@ -97,7 +96,9 @@
                     <th>Categoria</th>
                     <th>Precio del costo</th>
                     <th>Descripción</th>
+                    <th>Cantidad</th>
                     <th>Imagen</th>
+                    <th>Editar Imagen</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -111,9 +112,13 @@
               <th><?php echo $row['categoria']; ?></th>
               <th><?php echo $row['preciocosto']; ?></th>
               <th><?php echo $row['descripcion']; ?></th>
+              <th><?php echo $row['cantidad']; ?></th>
               <th><img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" width="40" height="50" alt="..."></th>
+              <th><a href="actualizarimagen.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success"style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+              Editar Imagen</button></th></a>
               <th><a href="actualizar2.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-success">Editar</button></th></a>
               <th><a href="confirmar.php?id=<?php echo $row['id']; ?>"><button type="button" class="btn btn-danger">Eliminar</button></th></a>
+
             </tr>
             <?php }?>
 
