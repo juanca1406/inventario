@@ -94,7 +94,7 @@
                     <th>Nombre del producto</th>
                     <th>Precio</th>
                     <th>Categoria</th>
-                    <th>Precio del costo</th>
+                    <th>Descuento%</th>
                     <th>Descripción</th>
                     <th>Cantidad</th>
                     <th>Imagen</th>

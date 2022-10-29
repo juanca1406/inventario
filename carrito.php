@@ -1,3 +1,7 @@
+<?php
+include 'conexion.php';
+include 'carritoprueba.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +26,8 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inicio</font></font></a></li>
           <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
-          <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito</font></font></a></li>
+          <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+		  Carrito</font></font></a></li>
          
         </ul>
 
@@ -45,128 +50,48 @@
     </div>
   </header>
 </body>
+<h3>Lista del carrito</h3>
+<?php if(!empty($_SESSION['carrito'])){ ?>
+<table class="table table-light table-bordered">
+	<tbody>
+		<tr>
+			<th width="20%">Imagen</th>
+			<th width="20%" class="text-center">Nombre</th>
+			<th width="20%" class="text-center">Precio</th>
+			<th width="20%" class="text-center">Cantidad</th>
+			<th width="20%" class="text-center">Total</th>
+			<th width="5%" class="text-center">--</th>
+		</tr>
+		<?php $total=0; ?>
+		<?php foreach($_SESSION['carrito'] as $indice=>$row){ ?>
+		<tr>
+			<td width=""><img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" width="40" height="50" alt=""></td>
+			<td width="20%" class="text-center"><?php echo $row['nombre']; ?></td>
+			<td width="20%" class="text-center"><?php echo $row['precio']; ?></td>
+			<td width="20%" class="text-center"><?php echo $row['cantidad']; ?></td>
+			<td width="20%" class="text-center"><?php echo number_format($row['precio']*$row['cantidad'],2); ?></td>
+			<td width="5%">
+
+			<form action="" method="post">
+			<input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($row['id'],COD,KEY); ?>">
+			<button class="btn btn-danger" type="submit" name="Guardar" value="Eliminar" >Eliminar</button>
+			</form>
+			</td>
+			
+		</tr>
+		<?php $total=$total+($row['precio']*$row['cantidad']); ?>
+		<?php } ?>
+		<tr>
+			<td colspan="3" align="right"><h3>Total</h3></td>
+			<td align="right"><h3>$<?php echo number_format($total,2);?></h3></td>
+		</tr>
+	</tbody>
+</table>
 </html>
-<?php
-	session_start();
-	include 'conexion.php';
-	if(isset($_SESSION['carrito'])){
-		if(isset($_GET['id'])){
-					$arreglo=$_SESSION['carrito'];
-					$encontro=false;
-					$numero=0;
-					for($i=0;$i<count($arreglo);$i++){
-						if($arreglo[$i]['Id']==$_GET['id']){
-							$encontro=true;
-							$numero=$i;
-						}
-					}
-					if($encontro==true){
-						$arreglo[$numero]['Cantidad']=$arreglo[$numero]['Cantidad']+1;
-						$_SESSION['carrito']=$arreglo;
-					}else{
-						$codigo="";
-						$nombre="";
-						$precio=0;
-						$imagen="";
-
-						//$re=mysql_query("select * from productos where id=".$_GET['id']);
-						$stmt = $conn->query('SELECT * FROM productos where id='.$_GET['id']);
-						while ($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-							$codigo=$f['codigo'];
-							$nombre=$f['nombre'];
-							$precio=$f['precio'];
-							$imagen=$f['imagen'];
-						}
-						$datosNuevos=array('Id'=>$_GET['id'],
-										'codigo'=>$codigo,
-										'nombre'=>$nombre,
-										'precio'=>$precio,
-										'imagen'=>$imagen,
-										'Cantidad'=>1);
-
-						array_push($arreglo, $datosNuevos);
-						$_SESSION['carrito']=$arreglo;
-
-					}
-		}
-
-
+<?php 
 	}else{
-		if(isset($_GET['id'])){
-			$codigo="";
-			$nombre="";
-			$precio=0;
-			$imagen="";
-
-			//$re=mysql_query("select * from productos where id=".$_GET['id']);
-			$stmt = $conn->query('SELECT * FROM productos where id='.$_GET['id']);
-
-			while ($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$codigo=$f['codigo'];
-				$nombre=$f['nombre'];
-				$precio=$f['precio'];
-				$imagen=$f['imagen'];
-			}
-
-			$arreglo[]=array('Id'=>$_GET['id'],
-							'codigo'=>$codigo,
-							'nombre'=>$nombre,
-							'precio'=>$precio,
-							'imagen'=>$imagen,
-							'Cantidad'=>1);
-			$_SESSION['carrito']=$arreglo;
-		}
-	}
-		echo "<section>";
-		echo "<div class='container productos'>";
-			$total=0;
-			if(isset($_SESSION['carrito'])){
-			$datos=$_SESSION['carrito'];
-			
-			$total=0;
-			for($i=0;$i<count($datos);$i++){
-				
-	?>
-				
-				<div class="producto">
-					
-						<img src="imagenes/<?php echo $datos[$i]['imagen'];?>" widht="200px" height="100px"><br>
-						<span>Codigo: <?php echo $datos[$i]['codigo'];?></span><br>
-						<span ><?php echo $datos[$i]['nombre'];?></span><br>
-						<span>Precio: <?php echo $datos[$i]['precio'];?></span><br>
-						<span>Cantidad: 
-							<input type="text" value="<?php echo $datos[$i]['Cantidad'];?>"
-							data-precio="<?php echo $datos[$i]['precio'];?>"
-							data-id="<?php echo $datos[$i]['Id'];?>"
-							class="cantidad" size="2" >
-						</span><br>
-						<span class="subtotal">Subtotal:<?php echo $datos[$i]['Cantidad']*$datos[$i]['precio'];?></span><br>
-						<a href="borrarcarrito.php?id=<?php echo $i?>" class="eliminar" data-id="<?php echo $datos[$i]['Id']?>">Eliminar</a>
-					
-				
-				</div>
-			<?php
-				$total=($datos[$i]['Cantidad']*$datos[$i]['precio'])+$total;
-				$_SESSION['facturaTotal']=$total;
-			}
-
-				echo "</div>";
-			}else{
-				echo '<center><h2>No has añadido ningun producto</h2></center>';
-			}
-			echo '<center><h2 id="total">Total: '.$total.'</h2></center>';
-			if($total!=0){
-					echo '<center><a href="pago.php" class="aceptar">Comprar</a></center>';	
-			}
-			
-		?>
-
-		
-	</section>
-
-<script>
-
-function faltaclienteJS(){
-	alert("Debe loguearse");
-}
-</script>
+?>
+<div class="alert alert-success">
+		No ayy productos en el carrito...
+</div>
+<?php } ?>

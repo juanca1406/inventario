@@ -1,4 +1,7 @@
-
+<?php
+	include 'conexion.php';
+  include 'carritoprueba.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +26,14 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
           <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
-          <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito</font></font></a></li>
+          <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+          Carrito(<?php
+          echo (empty($_SESSION['carrito']))?0:count($_SESSION['carrito']);
+          
+          ?>)</font></font></a></li>
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Búsqueda..." aria-label="Búsqueda">
-        </form>
-
+        
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="hacer" width="32" height="32" class="rounded-circle">
@@ -43,28 +47,57 @@
       </div>
     </div>
   </header>
+  <?php if($mensaje!=""){ ?>
+  <div class="alert alert-success">
+  <?php echo   $mensaje; ?>
+    <a href="carrito.php" class="badge badge-success">Ver carrito</a>
+</div>
+  <?php } ?>
+  
   <?php
-		include 'conexion.php';
-    $stmt = $conn->query('SELECT * FROM productos where id='.$_GET['id']);
+		$stmt = $conn->query('SELECT * FROM productos where id='.$_GET['id']);
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		?>
+	?>
+  
 
 <div class="card-columns">
          <div class="card">
-      <img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" height="300"  alt="...">
-       <div class="card-body">
-      <center><h5 class="card-title"><strong><?php echo $row['nombre']; ?></strong></h5></center>
-      <center><h3><?php echo $row['descripcion']; ?></h3></center>
-      <h6 style = "position:relative;  top: 20px;" class="card-title"><strong>precio: <?php echo $row['precio']; ?></strong></h5></div>
+      <img src="imagenes/<?php echo $row['imagen'];?>" class="card-img-top" height="300"  alt="...">
+       <div class="card-body">     
     </div>
-    <div>
-        <LAbel><?php echo $row['id']; ?></LAbel>
-        <h1>Nombre de la empresa</h1>
-        <a href="pago.php"><Button class="btn btn-info">Comprar</Button></a>
-        
-        <a href="carrito.php?id=<?php echo $row['id']; ?>"><Button class="btn btn-warning">Agregar al carrito</Button></a>
+    <div style="position:relative; left:550px; top:-335px;">
+         
+        <h1><?php echo $row['nombre'];?></h1>
+        <span>Descuento: -<?php echo $row['preciocosto']?>%</span>
+
+        <h2>Precio Actual: $<?php echo $row['precio']; ?></h2><br>
+        <?php
+          $total=($row['preciocosto']*$row['precio']/100);
+          echo '<center><h2>Con Descuento:</h2></center>';
+          echo '<center><h2 id="total">Total: $'.$total.'</h2></center>';
+       ?>
+        <div style = "position:relative; top:63px;  left: 10px;">
+          <a href="pago.php"><Button class="btn btn-info">Comprar</Button></a>
+        </div>  
+        <form action="" method="post">
+          <input type="text" name="id" id="id" value="<?php echo openssl_encrypt($row['id'],COD,KEY); ?>">
+          <input type="text" name="imagen" id="imagen" value="<?php echo openssl_encrypt($row['imagen'],COD,KEY); ?>">
+          <input type="text" name="nombre" id="nombre" value="<?php echo openssl_encrypt($row['nombre'],COD,KEY); ?>">
+          <input type="text" name="precio" id="precio" value="<?php echo openssl_encrypt($row['precio'],COD,KEY); ?>">
+          <input type="text" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1,COD,KEY); ?>">
+
+
+        <div style = "position:relative; top:25px;  left: 120px;">
+         <button name="Guardar" value="Agregar" type="submit" class="btn btn-info">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>  
+          Guardar</button>
+        </div>
+        </form>
     </div>
-    <?php
-		}
-	  ?>
+   
+<?php
+  }
+?>
