@@ -27,10 +27,16 @@
           <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perfil</font></font></a></li>
           <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
           <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-          Carrito(<?php
+          <?php
+          if(!empty($_SESSION['carrito'])){
+            echo "Carrito(";
           echo (empty($_SESSION['carrito']))?0:count($_SESSION['carrito']);
-          
-          ?>)</font></font></a></li>
+          ?>)
+          <?php 
+	        }else{
+        ?>
+        Carrito
+        <?php } ?> </font></font></a></li>
         </ul>
 
         
@@ -50,12 +56,13 @@
   <?php if($mensaje!=""){ ?>
   <div class="alert alert-success">
   <?php echo   $mensaje; ?>
-    <a href="carrito.php" class="badge badge-success">Ver carrito</a>
+    <a href="carrito.php"><button class="btn btn-success">Ver carrito</button></a>
 </div>
   <?php } ?>
   
   <?php
-		$stmt = $conn->query('SELECT * FROM productos where id='.$_GET['id']);
+
+		$stmt = $pdo->query('SELECT * FROM productos where id='.$_GET['id']);
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 	?>
@@ -81,11 +88,13 @@
           <a href="pago.php"><Button class="btn btn-info">Comprar</Button></a>
         </div>  
         <form action="" method="post">
-          <input type="text" name="id" id="id" value="<?php echo openssl_encrypt($row['id'],COD,KEY); ?>">
-          <input type="text" name="imagen" id="imagen" value="<?php echo openssl_encrypt($row['imagen'],COD,KEY); ?>">
-          <input type="text" name="nombre" id="nombre" value="<?php echo openssl_encrypt($row['nombre'],COD,KEY); ?>">
-          <input type="text" name="precio" id="precio" value="<?php echo openssl_encrypt($row['precio'],COD,KEY); ?>">
-          <input type="text" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1,COD,KEY); ?>">
+          <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($row['id'],COD,KEY); ?>">
+          <input type="hidden" name="imagen" id="imagen" value="<?php echo openssl_encrypt($row['imagen'],COD,KEY); ?>">
+          <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($row['nombre'],COD,KEY); ?>">
+          <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($row['precio'],COD,KEY); ?>">
+          <input type="hidden" name="preciocosto" id="preciocosto" value="<?php echo openssl_encrypt($row['preciocosto'],COD,KEY); ?>">
+          <input type="hidden" name="categoria" id="categoria" value="<?php echo openssl_encrypt($row['categoria'],COD,KEY); ?>">
+          <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1,COD,KEY); ?>">
 
 
         <div style = "position:relative; top:25px;  left: 120px;">

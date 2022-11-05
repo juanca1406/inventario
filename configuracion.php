@@ -1,5 +1,6 @@
 <?php
-    session_start();
+	include 'conexion.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,6 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
 
 </head>
 <body>
@@ -45,16 +45,34 @@
           </ul>
         </div>
 </header>
+<?php
+		      $stmt = $conn->query('SELECT * FROM login where id='.$_GET['id']);
+
+		      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+	        ?>
 <header class="py-3 mb-4 border-bottom">
     <div class="container d-flex flex-wrap justify-content-center">
       <a href="" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
       <img src="imagenes/motorola.png" alt="hacer" width="40" height="32" class="rounded-circle">
-        <span class="fs-4"><?php echo $_SESSION['nombre']?></span>
+        <span class="fs-4"><?php echo $row['nombre']; ?></span>
+        <div>
+        <a href=""><button >Agregar una imagen</button></a>
+        </div>
       </a>
     </div>
-    
-
-             
   </header>
+  <div class="container flex-wrap justify-content-center"> 
+  <span> Correo Electronico: </span>
+  <input type="email" value="<?php echo $row['email']; ?>"  readonly="readonly">
+  <span class="container flex-wrap"><a href=""><button class="btn btn-outline-success" type="button"> Editar</button></a></span>
+  </div><br>
+  <div class="container flex-wrap justify-content-center"> 
+  <span> Contraseña: </span>
+  <input type="password" value="<?php echo $row['password']; ?>"  readonly="readonly">
+  <span class="container flex-wrap"><a href=""><button class="btn btn-outline-success" type="button"> Editar</button></a></span>
+  </div>
 </body>
 </html>
+<?php 
+  }
+?>

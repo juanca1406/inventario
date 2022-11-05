@@ -11,7 +11,7 @@ extract($_POST);	//extraer todos los valores del metodo post del formulario de a
 		echo '<script>alert("ERROR EN PROCESAMIENTO NO SE ACTUALIZARON LOS DATOS")</script> ';
 		header("location: inventario.php");
 		
-		echo "<script>location.href='clientes.php.php'</script>";
+		echo "<script>location.href='clientes.php'</script>";
 	}else {
 		echo '<script>alert("REGISTRO ACTUALIZADO")</script> ';
 		

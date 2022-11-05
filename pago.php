@@ -1,3 +1,8 @@
+<?php
+	include 'conexion.php';
+  include 'carritoprueba.php';
+ 
+?>
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +24,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inicio</font></font></a></li>
           <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
-          <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito</font></font></a></li>
+          <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito</font></font></a></li>
 
         </ul>
 
@@ -47,108 +52,57 @@
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Tu Carrito</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="badge bg-primary rounded-pill"><?php echo (empty($_SESSION['carrito']))?0:count($_SESSION['carrito']);
+          ?></span>
         </h4>
         <ul class="list-group mb-3">
+        <?php if(!empty($_SESSION['carrito'])){ ?>
+
+        <?php $total=0; ?>
+        <?php foreach($_SESSION['carrito'] as $indice=>$row){ ?>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Primer Nombre</h6>
-              <small class="text-muted">Categoria</small>
+              <h6 class="my-0"><?php echo $row['nombre']; ?></h6>
+              <small class="text-muted"><?php echo $row['categoria']; ?></small>
             </div>
-            <span class="text-muted">$Precio</span>
+            <span class="text-muted">$<?php echo $row['precio']; ?></span>
+            <form action="" method="post">
+            <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($row['id'],COD,KEY); ?>">
+            <button class="btn btn-danger" type="submit" name="Guardar" value="Eliminar">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-x-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg></button>
+            </form>
+            <span class="text-muted" value="<?php echo $row['cantidad']; ?>"></span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Segundo Nombre</h6>
-              <small class="text-muted">Categoria</small>
-            </div>
-            <span class="text-muted">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Tercer Nombre</h6>
-              <small class="text-muted">Categoria</small>
-            </div>
-            <span class="text-muted">$5</span>
-          </li>
+          <?php $total=$total+($row['precio']*$row['cantidad']); ?>
+        <?php
+          }
+        ?>
+        
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (Pesos)</span>
-            <strong>$Suma</strong>
+            <span>Total:</span>
+            <strong>$<?php echo number_format($total,2);?>
+              <div id="paypal-button-container"></div>
+            </strong>
           </li>
         </ul>
+        <?php 
+	        }else{
+        ?>
+<div class="alert alert-success">
+    No ayy productos en el carrito...
+    <a href="tienda.php" ><button type="button" class="btn btn-success">Ver Tienda</button></a>
+</div>
+<?php } ?>
 
       </div>
+      
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Dirección de Envio</h4>
-        <form class="" >
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <label for="firstName" class="form-label">Nombre Completo</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-            </div>
-
-            <div class="col-sm-6">
-              <label for="lastName" class="form-label">Apellido Completo</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-              <div class="invalid-feedback">
-                Valid last name is required.
-              </div>
-            </div>
-
-            <div class="col-12">
-              <label for="email" class="form-label">Correo Electrónico</label>
-              <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" required="">
-            </div>
-
-            <div class="col-12">
-              <label for="address" class="form-label">Dirreción</label>
-              <input type="text" class="form-control" id="address" placeholder="Dirreción" required="">
-            </div>
-
-   
-
-          <h4 class="mb-3">Pagos</h4>
-
-          <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
-              <label class="form-check-label" for="credit">Targeta de crédito</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
-              <label class="form-check-label" for="debit">Targeta de débito</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
-
-          <div class="row gy-1">
-            <div class="col-md-6">
-              <label for="cc-name" class="form-label">Nombre de la targeta</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-              <small class="text-muted">Nombre completo como se muestra en la tarjeta</small>
-            </div>
-
-            <div class="col-md-6">
-              <label for="cc-number" class="form-label">Número de Tarjeta de Crédito</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Vencimiento</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-            </div>
-
-            <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-            </div>
-          </div>
-          <button class="w-50 btn btn-primary btn-lg" type="submit">Comprobación del pago</button>
-        </form>
-      </div>
+        <h4 class="mb-3">Pago</h4>
+      
+            
     </div>
   </main>
 </div>

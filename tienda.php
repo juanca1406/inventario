@@ -1,7 +1,7 @@
 <?php 
-  include('connect_db.php');
-  $query = "select * from productos";
-  $resultado = mysqli_query($mysqli,$query);
+  include('conexion.php');
+  include ('carritoprueba.php');
+  
 ?>
 
 <!DOCTYPE html>
@@ -11,62 +11,325 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css">
   </head>
-<body>
-<header class="p-3 mb-3 border-bottom">
+  <body>
+    
+  <div class="super_container">
+
+<!-- Header -->
+
+<header class="header trans_300">
+
+  <!-- Top Navigation -->
+
+  <div class="top_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="top_nav_left">Envios Gratis</div>
+					</div>
+					<div class="col-md-6 text-right">
+						<div class="top_nav_right">
+							<ul class="top_nav_menu">
+
+								<!-- Currency / Language / My Account -->
+								<li class="account">
+									<a href="#">
+										MY Cuenta
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="account_selection">
+										<li><a href="login.php"><i class="fa fa-sign-in" aria-hidden="true"></i>Iniciar</a></li>
+										<li><a href="registrar.php"><i class="fa fa-user-plus" aria-hidden="true"></i>Registro</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  <!-- Main Navigation -->
+
+  <div class="main_nav_container">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Oreja"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="usuario.php" class="nav-link px-2 link-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Inicio</font></font></a></li>
-          <li><a href="tienda.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tienda</font></font></a></li>
-          <li><a href="carrito.php" class="nav-link px-2 link-dark"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Carrito(0)</font></font></a></li>
-         
-        </ul>
-        <div class="h-10 p-3 rounded-3;">
-         <center><h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la empresa</font></font></h2></center>
+      <div class="row">
+        <div class="col-lg-12 text-right">
+          <div class="logo_container">
+            <a href="#">Nombre de<span> la Empresa</span></a>
+          </div>
+          <nav class="navbar">
+            <ul class="navbar_menu">
+              <li><a href="index.php">Hogar</a></li>
+              <li><a href="tienda.php">Tienda</a></li>
+              <li><a href="contactos.php">Contactos</a></li>
+            </ul>
+            <ul class="navbar_user">
+              <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+              <li class="checkout">
+                <a href="cart/cart.php">
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <span id="checkout_items" class="checkout_items"> <?php echo (empty($_SESSION['carrito']))?0:count($_SESSION['carrito']); ?>
+  </span>
+                </a>
+              </li>
+            </ul>
+            <div class="hamburger_container">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+          </nav>
         </div>
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Búsqueda..." aria-label="Búsqueda">
-        </form>
+      </div>
+    </div>
+  </div>
 
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="hacer" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
+</header>
 
-            <li><a class="dropdown-item" href="configuracion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Configuración</font></font></a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="cerrarsesion.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">desconectar</font></font></a></li>
+<div class="fs_menu_overlay"></div>
+<div class="hamburger_menu">
+  <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+  <div class="hamburger_menu_content text-right">
+    <ul class="menu_top_nav">
+      <li class="menu_item has-children">
+        <a href="#">
+          usd
+          <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="menu_selection">
+          <li><a href="#">cad</a></li>
+          <li><a href="#">aud</a></li>
+          <li><a href="#">eur</a></li>
+          <li><a href="#">gbp</a></li>
+        </ul>
+      </li>
+      <li class="menu_item has-children">
+        <a href="#">
+          English
+          <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="menu_selection">
+          <li><a href="#">French</a></li>
+          <li><a href="#">Italian</a></li>
+          <li><a href="#">German</a></li>
+          <li><a href="#">Spanish</a></li>
+        </ul>
+      </li>
+      <li class="menu_item has-children">
+        <a href="#">
+          My Account
+          <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="menu_selection">
+          <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+          <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+        </ul>
+      </li>
+      <li class="menu_item"><a href="#">home</a></li>
+      <li class="menu_item"><a href="#">shop</a></li>
+      <li class="menu_item"><a href="#">promotion</a></li>
+      <li class="menu_item"><a href="#">pages</a></li>
+      <li class="menu_item"><a href="#">blog</a></li>
+      <li class="menu_item"><a href="#">contact</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+<!-- New Arrivals -->
+
+<div class="new_arrivals">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <div class="section_title new_arrivals_title">
+          <h2>Los recién llegados</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col text-center">
+        <div class="new_arrivals_sorting">
+          <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Todos</li>
+            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">Computadores</li>
+            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">Celulares</li>
+            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">accesorios</li>
           </ul>
         </div>
       </div>
     </div>
-  </header>
+    <div class="row">
+    <?php
+    $sentencia=$pdo->prepare("SELECT * FROM `productos`");
+    $sentencia->execute();
+    $lista=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+      <div class="col">
+        <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
 
-        <div class="card-columns">
-        <?php foreach($resultado as $row){ ?>
-         <div class="card">
-        
-      <img src="imagenes/<?php echo $row['imagen']; ?>" class="card-img-top" height="317px";  alt="...">
-       <div class="card-body">
-      <center><h5 class="col-xs-12 col-sm-4 col-md-4 col-lg-6 text-center card-title"><strong><?php echo $row['nombre']; ?></strong></h5></center>
-      <center><p><?php echo $row['descripcion']; ?></p></center>
-      <h6 style = "position:relative;  top: 15px;" class="card-title"><strong>precio: <?php echo $row['precio']; ?></strong></h5></div>
+          <!-- Product 1 -->
+                 <?php foreach($lista as $row){ ?>
+          <div class="product-item men">
+            <div class="product discount product_filter">
+              <div class="product_image">
+                <img src="imagenes/<?php echo $row['imagen']; ?>" alt="">
+              </div>
+              <div class="favorite favorite_left"></div>
+              <div class="product_info">
+                <h6 class="product_name"><a href="single.html"><?php echo $row['nombre']; ?></a></h6>
+                <div class="product_price">$<?php echo $row['precio']; ?><span>$<?php echo $row['preciocosto']; ?></span></div>
+              </div>
+            </div>
+            <form action="" method="post">
+                  <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($row['id'],COD,KEY); ?>">
+                  <input type="hidden" name="imagen" id="imagen" value="<?php echo openssl_encrypt($row['imagen'],COD,KEY); ?>">
+                  <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($row['nombre'],COD,KEY); ?>">
+                  <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($row['precio'],COD,KEY); ?>">
+            <input type="hidden" name="preciocosto" id="preciocosto" value="<?php echo openssl_encrypt($row['preciocosto'],COD,KEY); ?>">
+                  <input type="hidden" name="categoria" id="categoria" value="<?php echo openssl_encrypt($row['categoria'],COD,KEY); ?>">
+                  <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1,COD,KEY); ?>">
 
-      <a href="comprar.php?id=<?php echo $row['id'];?>"><button class="btn btn-secondary"  style = "position:relative; left:150px; top:-12px;">Comprar</button></a>
-      </div>      
+            <button name="Guardar" value="Agregar" type="submit" class="red_button add_to_cart_button"> AÑADIR AL CARRITO</button>
+             </form>
+          </div>
+                <?php }?>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>				
+          <!-- Slider Navigation -->
+
+          <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </div>
+          <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Benefit -->
+
+<div class="benefit">
+  <div class="container">
+    <div class="row benefit_row">
+      <div class="col-lg-3 benefit_col">
+        <div class="benefit_item d-flex flex-row align-items-center">
+          <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+          <div class="benefit_content">
+            <h6>ENVÍO GRATIS</h6>
+            <p>Alteración sufrida en alguna forma</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 benefit_col">
+        <div class="benefit_item d-flex flex-row align-items-center">
+          <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+          <div class="benefit_content">
+            <h6>CACHÉ EN LA ENTREGA</h6>
+            <p>Internet tiende a repetirse</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 benefit_col">
+        <div class="benefit_item d-flex flex-row align-items-center">
+          <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+          <div class="benefit_content">
+            <h6>45 DÍAS DE VUELTA</h6>
+            <p>Hacer que parezca legible</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 benefit_col">
+        <div class="benefit_item d-flex flex-row align-items-center">
+          <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+          <div class="benefit_content">
+            <h6>APERTURA TODA LA SEMANA</h6>
+            <p>8AM - 09PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Newsletter -->
+
+<div class="newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+          <h4>Boletin informativo</h4>
+          <p>Obtén un 20% de descuento en tu primera compra</p>
+        </div>
+      </div>
       
-  <?php }?>
-</body>
-</html>
+    </div>
+  </div>
+</div>
 
+<!-- Footer -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+          <ul class="footer_nav">
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="contactos.php">Contáctenos</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+          <ul>
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="footer_nav_container">
+          <div class="cr">2022 Todos los derechos reservados. Nombre de la empresa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="js/custom.js"></script>
+</body>
+
+</html>

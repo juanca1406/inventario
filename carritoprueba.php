@@ -26,10 +26,22 @@ if (isset($_POST['Guardar'])){
                 $mensaje.="OK precio".$precio."<br/>";
             }else{ $mensaje.="Upp.. Algo pasa con el precio"."<br/>"; break;}
 
+            if (is_string(openssl_decrypt($_POST['preciocosto'],COD,KEY ))) {
+                $preciocosto=openssl_decrypt($_POST['preciocosto'],COD,KEY );
+                $mensaje.="OK preciocosto".$preciocosto."<br/>";
+            }else{ $mensaje.="Upp.. Algo pasa con el preciocosto"."<br/>"; break;}
+
+
+            if (is_string(openssl_decrypt($_POST['categoria'],COD,KEY ))) {
+                $categoria=openssl_decrypt($_POST['categoria'],COD,KEY );
+                $mensaje.="OK categoria".$categoria."<br/>";
+            }else{ $mensaje.="Upp.. Algo pasa con el categoria"."<br/>"; break;}
+
             if (is_string(openssl_decrypt($_POST['cantidad'],COD,KEY ))) {
                 $cantidad=openssl_decrypt($_POST['cantidad'],COD,KEY );
                 $mensaje.="OK Cantidad".$cantidad."<br/>";
             }else{ $mensaje="Upp.. Algo pasa con el cantidad"."<br/>"; break;}
+            
 
             if (!isset($_SESSION['carrito'])){
                 $row=array(
@@ -37,6 +49,8 @@ if (isset($_POST['Guardar'])){
                     'imagen'=>$imagen,
                     'nombre'=>$nombre,
                     'precio'=>$precio,
+                    'preciocosto'=>$preciocosto,
+                    'categoria'=>$categoria,
                     'cantidad'=>$cantidad
                 );
                 $_SESSION['carrito'][0]=$row;
@@ -55,6 +69,8 @@ if (isset($_POST['Guardar'])){
                     'imagen'=>$imagen,
                     'nombre'=>$nombre,
                     'precio'=>$precio,
+                    'preciocosto'=>$preciocosto,
+                    'categoria'=>$categoria,
                     'cantidad'=>$cantidad
                 );
                 $_SESSION['carrito'][$numerorow]=$row;
